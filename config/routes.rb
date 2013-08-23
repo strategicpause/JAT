@@ -1,7 +1,10 @@
 Jat::Application.routes.draw do
   post "auth/login"
   post "auth/logout"
+
   resources :users, :defaults => { :format => 'json' }
+  resources :tweets, :defaults => { :format => 'json' }
+  get "users/:id/tweets"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

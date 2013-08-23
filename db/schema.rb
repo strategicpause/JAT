@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811234500) do
+ActiveRecord::Schema.define(:version => 20130823040814) do
 
   create_table "access_tokens", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(:version => 20130811234500) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "tweets", :force => true do |t|
+    t.string   "tweet"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tweets", ["user_id"], :name => "index_tweets_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
