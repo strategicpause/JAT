@@ -19,9 +19,8 @@ class TweetsController < ApplicationController
   # POST /tweets.json
   def create
     user = user_from_token
-    @tweet = Tweet.new
+    @tweet = user.tweets.new()
     @tweet.tweet = params[:tweet]
-    @tweet.user = user
     if @tweet.save
       render :json => @tweet, :status => :created
     else

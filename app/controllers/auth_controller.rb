@@ -1,11 +1,16 @@
 class AuthController < ApplicationController
   def login
-  	user = User.find_by_name(params[:name])
+    name = params[:username]
+  	user = User.find_by_name(name)
   	if user and user.authenticate(params[:password])
-  		key = user.api_key.create()
-  		render :json => key
+  		response = user.api_key.create()
+      response[:name] = name
+  		render :json => response
   	else
-      head :no_content
+      render :status => 401, :json => {
+        :success => false, 
+        :error => 'Login failed.'
+      }
   	end
   end
 

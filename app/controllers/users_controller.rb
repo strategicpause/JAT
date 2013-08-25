@@ -11,14 +11,21 @@ class UsersController < ApplicationController
     render :json => @user
   end
 
+  # GET /users/1/tweets
+  def tweets
+    @user = User.find(params[:id])
+
+  end
+
   # POST /users
   def create
     @user = User.new
-    @user.name = params[:name]
+    @user.name = params[:username]
     @user.password = params[:password]
     @user.password_confirmation = params[:password_confirm]
     if @user.save
-      render :json => @user, :status => :created
+      @key = @user.api_key.create
+      render :json => @key, :status => :created
     else
       render :json => @user.errors, :status => :unprocessable_entity
     end
