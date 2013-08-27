@@ -23,7 +23,9 @@ var LoginView = Backbone.View.extend({
 	      password: password
 	    },
 	    success: function(data) {
-	      // Redirect to user screen
+	      access_token = data.access_token
+	      current_user = data.user.id
+	      window.location.replace('/#users/' + current_user);
 	    },
 	    error: function(data) {
 	      // Display error message

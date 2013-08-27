@@ -25,7 +25,8 @@
       var registerView = new RegisterView();
     },
     user: function(id) {
-
+      var user = new User({ id: id });
+      var userView = new UserView({ model: user });
     }
   });
   app = new Router();

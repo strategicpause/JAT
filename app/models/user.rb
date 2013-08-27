@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
 	has_many :tweets
 
 	def as_json(options)
-		super(:only => [:id, :name])
+		super(:only => [:id, :name], 
+			:include => {
+				:tweets => { 
+					:only => [:id, :tweet, :created_at] 
+				}
+			}
+		)
 	end
 end
