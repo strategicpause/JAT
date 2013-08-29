@@ -11,6 +11,7 @@
         <input type="password" name="password" id="password" />
         <br />
         <button id="submit">Login</button>
+        <div id="error"></div>
       </div>
       <a href="#register">Register</a>
     </script>
@@ -31,7 +32,15 @@
     <script id="template-user" type="text/handlebars-template">
       <div id="user">
         <h3>{{name}}</h3>
-        <ul>
+        {{#if current_user}}
+        <div>
+          <textarea id="tweet" maxlength="140"></textarea>
+          <br />
+          <button id="submit">Tweet</button>
+          <span id="chars">0</span>/140
+        </div>
+        {{/if}}
+        <ul id="tweets">
           {{#each tweets}}
             <li>{{tweet}}</li>
           {{/each}}

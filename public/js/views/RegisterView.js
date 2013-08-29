@@ -5,12 +5,16 @@ var RegisterView = Backbone.View.extend({
 	  'click button#submit': 'register'
 	},
 	initialize: function(){
-	  _.bindAll(this, 'render', 'register'); // every function that uses 'this' as the current object should be in here
+	  _.bindAll(this, 'render', 'remove', 'register');
 	  this.render();
 	},
 	render: function(){
 	  var template = Handlebars.compile(this.template);
-	  this.$el.append(template);
+	  this.$el.html(template);
+	},
+	remove: function() {
+		this.$el.empty().detach();
+		return this;
 	},
 	register: function(){
 	  var username = $('#username').val();

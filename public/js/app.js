@@ -1,16 +1,4 @@
 (function($) {
-  $.ajaxSetup({
-    statusCode: {
-        401: function(){
-            // Redirec the to the login page.
-            window.location.replace('/#login');
-        },
-        403: function() {
-            // 403 -- Access denied
-            window.location.replace('/#denied');
-        }
-    }
-  });
   window.Router = Backbone.Router.extend({
     routes: {
         "": "login",
@@ -31,4 +19,7 @@
   });
   app = new Router();
   Backbone.history.start();
+  // Globals
+  window.access_token = null;
+  window.current_user = 0;
 })(jQuery);

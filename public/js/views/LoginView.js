@@ -5,12 +5,16 @@ var LoginView = Backbone.View.extend({
 	  'click button#submit': 'login'
 	},
 	initialize: function(){
-	  _.bindAll(this, 'render', 'login'); // every function that uses 'this' as the current object should be in here
+	  _.bindAll(this, 'render', 'remove', 'login');
 	  this.render();
 	},
 	render: function(){
 	  var template = Handlebars.compile(this.template);
-	  this.$el.append(template);
+	  this.$el.html(template);
+	},
+	remove: function() {
+		this.$el.empty().detach();
+		return this;
 	},
 	login: function(){
 	  var username = $('#username').val();
@@ -23,13 +27,17 @@ var LoginView = Backbone.View.extend({
 	      password: password
 	    },
 	    success: function(data) {
-	      access_token = data.access_token
-	      current_user = data.user.id
-	      window.location.replace('/#users/' + current_user);
+	      window.access_token = data.access_token
+	      window.current_user = data.user.id
+	      window.location.replace('/#user/' + current_user);
 	    },
 	    error: function(data) {
-	      // Display error message
+	      $('#error').html(data.responseJSON.error);
 	    }
 	  });
+	},
+	close : function() {
+		this.remove();
+		this.unbind();
 	}
 });
