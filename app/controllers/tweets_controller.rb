@@ -11,7 +11,7 @@ class TweetsController < ApplicationController
   # GET /tweets/1.json
   def show
     user = user_from_token
-    @tweet = user.tweets.find_by_id(params[:id])
+    @tweet = user.tweets.where(:id => params[:id])
     render :json => @tweet
   end
 
@@ -38,8 +38,7 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1.json
   def destroy
     user = user_from_token
-    @tweet = user.find_tweet_by_id(params[:id])
-    @tweet.destroy
+    user.tweets.destroy(params[:id])
     head :no_content
   end
 

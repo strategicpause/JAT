@@ -1,1 +1,3 @@
-var Tweet = Backbone.Model.extend({});
+var Tweet = Backbone.Model.extend({
+	urlRoot: '/tweets',
+});
